@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Botão Tilambucador</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: #111;
+        font-family: Arial, sans-serif;
+      }
+
+      .tilambucador-btn {
+        padding: 15px 30px;
+        background: linear-gradient(45deg, #8b0000, #ff4500);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s;
+        box-shadow: 0 0 15px #ff0000;
+      }
+
+      .tilambucador-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 30px #ff0000;
+      }
+
+      .tilambucador-btn::after {
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        opacity: 0;
+        transition: all 0.5s;
+      }
+
+      .tilambucador-btn:hover::after {
+        opacity: 1;
+        top: -10px;
+        left: -10px;
+      }
+
+      .pipe {
+        position: absolute;
+        bottom: -50px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 24px;
+        opacity: 0;
+        transition: all 0.5s;
+      }
+
+      .active {
+        opacity: 1;
+        bottom: -30px;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="tilambucador-btn" onclick="tiltThePipe()">TILAMBUCAR</button>
+    <div class="pipe" id="pipe">🚰💦 (cano sendo lambido)</div>
+
+    <script>
+      function tiltThePipe() {
+        const pipe = document.getElementById("pipe");
+        pipe.classList.add("active");
+
+        setTimeout(() => {
+          alert("🚨 ATENÇÃO: Cano tilambucado com sucesso! \n\nAgora vá lavar essa boca com sabão...");
+          pipe.classList.remove("active");
+        }, 2000);
+      }
+    </script>
+  </body>
+</html>

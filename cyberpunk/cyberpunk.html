@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cyberpunk Buttons - Fixed Hover</title>
+    <link rel="stylesheet" href="cyber.css" />
+  </head>
+  <body>
+    <div class="scanlines"></div>
+
+    <button class="cyber-btn tilambucador-btn" onclick="tiltThePipe()">TILAMBUCAR</button>
+    <div class="pipe" id="pipe">🚰💦 [SYSTEM: PIPE_HACKED]</div>
+
+    <button class="cyber-btn infernal-btn">SAIA DAQUI, MORTAL</button>
+
+    <script>
+      function tiltThePipe() {
+        const pipe = document.getElementById("pipe");
+        pipe.classList.add("active");
+
+        // Create particles
+        for (let i = 0; i < 20; i++) {
+          createParticle();
+        }
+
+        setTimeout(() => {
+          pipe.classList.remove("active");
+        }, 2000);
+      }
+
+      function createParticle() {
+        const particle = document.createElement("div");
+        particle.style.position = "absolute";
+        particle.style.width = "4px";
+        particle.style.height = "4px";
+        particle.style.background = "#0ff0fc";
+        particle.style.borderRadius = "50%";
+        particle.style.pointerEvents = "none";
+        particle.style.boxShadow = "0 0 10px #0ff0fc, 0 0 20px #0ff0fc";
+
+        // Random position around the button
+        const btn = document.querySelector(".tilambucador-btn");
+        const btnRect = btn.getBoundingClientRect();
+        const x = btnRect.left + btnRect.width / 2 + (Math.random() - 0.5) * 40;
+        const y = btnRect.top + btnRect.height / 2 + (Math.random() - 0.5) * 40;
+
+        particle.style.left = `${x}px`;
+        particle.style.top = `${y}px`;
+
+        document.body.appendChild(particle);
+
+        // Animate particle
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = 2 + Math.random() * 3;
+        const lifetime = 1000 + Math.random() * 1000;
+
+        let startTime = Date.now();
+
+        function update() {
+          const elapsed = Date.now() - startTime;
+          const progress = elapsed / lifetime;
+
+          if (progress >= 1) {
+            particle.remove();
+            return;
+          }
+
+          const distance = (velocity * elapsed) / 20;
+          const currentX = x + Math.cos(angle) * distance;
+          const currentY = y + Math.sin(angle) * distance;
+
+          particle.style.left = `${currentX}px`;
+          particle.style.top = `${currentY}px`;
+          particle.style.opacity = 1 - progress;
+
+          requestAnimationFrame(update);
+        }
+
+        requestAnimationFrame(update);
+      }
+
+      document.querySelector(".infernal-btn").addEventListener("click", () => {
+        // Glitch effect on click
+        document.body.style.overflow = "hidden";
+        document.body.style.filter = 'url("#glitch")';
+
+        setTimeout(() => {
+          document.body.style.filter = "none";
+        }, 300);
+      });
+    </script>
+
+    <!-- SVG Filter for glitch effect -->
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: none">
+      <defs>
+        <filter id="glitch">
+          <feColorMatrix in="SourceGraphic" mode="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r" />
+          <feOffset in="r" result="r" dx="-5">
+            <animate attributeName="dx" values="0; -5; 0" dur="0.1s" repeatCount="1" />
+          </feOffset>
+          <feColorMatrix in="SourceGraphic" mode="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g" />
+          <feOffset in="g" result="g" dx="5">
+            <animate attributeName="dx" values="0; 5; 0" dur="0.1s" repeatCount="1" />
+          </feOffset>
+          <feColorMatrix in="SourceGraphic" mode="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b" />
+          <feOffset in="b" result="b" dx="-5">
+            <animate attributeName="dx" values="0; -5; 0" dur="0.1s" repeatCount="1" />
+          </feOffset>
+          <feBlend in="r" in2="g" mode="screen" result="blend" />
+          <feBlend in="blend" in2="b" mode="screen" result="blend" />
+          <feGaussianBlur in="blend" stdDeviation="1" result="blur" />
+          <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+      </defs>
+    </svg>
+  </body>
+</html>

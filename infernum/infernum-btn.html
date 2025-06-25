@@ -1,0 +1,45 @@
+<button class="infernal-btn">SAIA DAQUI, MORTAL</button>
+
+<style>
+  .infernal-btn {
+    padding: 12px 24px;
+    background: linear-gradient(45deg, #8b0000, #ff4500);
+    border: 2px solid #ffd700;
+    color: white;
+    font-weight: bold;
+    text-shadow: 0 0 5px #000;
+    border-radius: 0;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .infernal-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #ff0000;
+  }
+
+  .infernal-btn::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(to bottom right, transparent, transparent, rgba(255, 215, 0, 0.2), transparent);
+    transform: rotate(30deg);
+    animation: shine 3s infinite;
+  }
+
+  @keyframes shine {
+    to {
+      left: 150%;
+    }
+  }
+</style>
+<script>
+  document.querySelector(".infernal-btn").addEventListener("click", () => {
+    alert("VOCÊ INVOCOU O DEMÔNIO DO CSS!");
+  });
+</script>
