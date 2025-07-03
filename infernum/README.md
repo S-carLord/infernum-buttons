@@ -16,17 +16,20 @@ Veja o projeto em ação [aqui](https://s-carlord.github.io/infernum-buttons/)!
 
 ## 📸 Visualização
 
-![Botão Infernal](infernum-btn.gif)
+![Botão Infernal](./assets/infernum-btn.gif)
 
 ## 📁 Estrutura do Projeto
 
 ```
-📦 infernum-buttons/
-├── infernum-btn.html      # Botão isolado com estilo e ação personalizada
-├── page.html              # Página demonstrativa com efeitos visuais e narrativa interativa
-├── README.md              # Este arquivo
-├── LICENSE                # Arquivo da licença MIT
-├── assets/                # Imagens e outros recursos (ex.: GIF de demonstração)
+📦 infernum/
+├── App/
+│   ├── hellpageV2.html  # Página principal da aplicação completa
+│   ├── hellpageV2.html  # Estilos customizados da aplicação
+│
+├── infernum-btn.html    # Botão isolado, autocontido
+├── README.md            # Este arquivo
+├── LICENSE              # Arquivo da licença MIT
+├── assets/              # Imagens e outros recursos (ex.: GIF de demonstração)
 ```
 
 ### 🧪 Demonstração

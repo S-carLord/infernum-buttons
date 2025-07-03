@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cyberpunk Terminal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap");
+
+      body {
+        font-family: "Share Tech Mono", monospace;
+        background-color: #0a0a12;
+        color: #0ff0fc;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      .scanlines {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(rgba(10, 10, 18, 0.2) 50%, rgba(0, 0, 0, 0.25) 50%);
+        background-size: 100% 4px;
+        pointer-events: none;
+        z-index: 1000;
+      }
+
+      .cyber-btn {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s;
+        transform: translateZ(0);
+      }
+
+      .cyber-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(15, 240, 252, 0.4), transparent);
+        transition: all 0.5s;
+      }
+
+      .cyber-btn:hover::before {
+        left: 100%;
+      }
+
+      .glitch-text {
+        text-shadow: 0 0 5px #0ff0fc, 0 0 10px #0ff0fc;
+        position: relative;
+      }
+
+      .glitch-text::before,
+      .glitch-text::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.8;
+      }
+
+      .glitch-text::before {
+        color: #f00;
+        z-index: -1;
+        animation: glitch-effect 3s infinite;
+      }
+
+      .glitch-text::after {
+        color: #0f0;
+        z-index: -2;
+        animation: glitch-effect 2s infinite reverse;
+      }
+
+      @keyframes glitch-effect {
+        0% {
+          transform: translate(0);
+        }
+        20% {
+          transform: translate(-3px, 3px);
+        }
+        40% {
+          transform: translate(-3px, -3px);
+        }
+        60% {
+          transform: translate(3px, 3px);
+        }
+        80% {
+          transform: translate(3px, -3px);
+        }
+        100% {
+          transform: translate(0);
+        }
+      }
+
+      .terminal-line {
+        border-right: 2px solid #0ff0fc;
+        animation: blink 0.8s infinite;
+      }
+
+      @keyframes blink {
+        0% {
+          border-right-color: transparent;
+        }
+        50% {
+          border-right-color: #0ff0fc;
+        }
+        100% {
+          border-right-color: transparent;
+        }
+      }
+
+      .pipe {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.5s;
+      }
+
+      .pipe.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .cyber-card {
+        box-shadow: 0 0 15px rgba(15, 240, 252, 0.5);
+        transition: all 0.3s;
+      }
+
+      .cyber-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 25px rgba(15, 240, 252, 0.8);
+      }
+
+      .cyber-input {
+        background-color: rgba(10, 10, 18, 0.7);
+        border: 1px solid #0ff0fc;
+        color: #0ff0fc;
+      }
+
+      .cyber-input:focus {
+        outline: none;
+        box-shadow: 0 0 10px rgba(15, 240, 252, 0.5);
+      }
+
+      .grid-pattern {
+        background-image: linear-gradient(rgba(15, 240, 252, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(15, 240, 252, 0.1) 1px, transparent 1px);
+        background-size: 20px 20px;
+      }
+
+      .cyber-loader {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background-color: #0ff0fc;
+        box-shadow: 24px 0 #0ff0fc, -24px 0 #0ff0fc;
+        position: relative;
+        animation: flash 1s ease-out infinite alternate;
+      }
+
+      @keyframes flash {
+        0% {
+          background-color: rgba(15, 240, 252, 0.2);
+          box-shadow: 24px 0 rgba(15, 240, 252, 0.2), -24px 0 #0ff0fc;
+        }
+        50% {
+          background-color: #0ff0fc;
+          box-shadow: 24px 0 rgba(15, 240, 252, 0.2), -24px 0 rgba(15, 240, 252, 0.2);
+        }
+        100% {
+          background-color: rgba(15, 240, 252, 0.2);
+          box-shadow: 24px 0 #0ff0fc, -24px 0 rgba(15, 240, 252, 0.2);
+        }
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .cyber-btn {
+          padding: 0.5rem 1rem;
+          font-size: 0.9rem;
+        }
+
+        .terminal-text {
+          font-size: 0.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body class="min-h-screen grid-pattern">
+    <div class="scanlines"></div>
+
+    <!-- Main Container -->
+    <div class="container mx-auto px-4 py-8">
+      <!-- Header -->
+      <header class="flex flex-col md:flex-row justify-between items-center mb-8 border-b border-cyan-400 pb-6">
+        <div class="flex items-center mb-4 md:mb-0">
+          <i class="fas fa-terminal text-3xl text-cyan-400 mr-3"></i>
+          <h1 class="text-3xl md:text-4xl font-bold glitch-text" data-text="CYBER_TERMINAL_v4.2.0">CYBER_TERMINAL_v4.2.0</h1>
+        </div>
+        <div class="flex space-x-3">
+          <div class="cyber-btn px-4 py-2 bg-black border border-cyan-400 rounded text-cyan-400 hover:bg-cyan-400 hover:text-black cursor-pointer"><i class="fas fa-user-secret mr-2"></i>LOGIN</div>
+          <div class="cyber-btn px-4 py-2 bg-black border border-cyan-400 rounded text-cyan-400 hover:bg-cyan-400 hover:text-black cursor-pointer"><i class="fas fa-power-off mr-2"></i>POWER</div>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Left Panel - Terminal -->
+        <div class="lg:col-span-2 cyber-card bg-black bg-opacity-80 border border-cyan-400 rounded-lg p-6">
+          <div class="flex items-center mb-4">
+            <div class="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
+            <div class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+            <div class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+            <span class="text-sm ml-2">SYSTEM_TERMINAL</span>
+          </div>
+
+          <div class="terminal-text mb-6 h-64 overflow-y-auto">
+            <p class="mb-2"><span class="text-green-400">user@cyberterm:~$</span> Initializing system...</p>
+            <p class="mb-2"><span class="text-green-400">user@cyberterm:~$</span> Loading modules...</p>
+            <p class="mb-2"><span class="text-green-400">user@cyberterm:~$</span> Checking security protocols...</p>
+            <p class="mb-2"><span class="text-green-400">user@cyberterm:~$</span> <span class="terminal-line">Connecting to neural network</span></p>
+            <div id="terminalOutput"></div>
+          </div>
+
+          <div class="flex">
+            <input type="text" class="cyber-input flex-grow px-4 py-2 rounded-l focus:outline-none" placeholder="Enter command..." id="terminalInput" />
+            <button class="cyber-btn px-4 py-2 bg-cyan-400 text-black rounded-r hover:bg-cyan-300" onclick="executeCommand()">
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Panel - Controls -->
+        <div class="cyber-card bg-black bg-opacity-80 border border-cyan-400 rounded-lg p-6">
+          <h2 class="text-xl font-bold mb-4 glitch-text" data-text="CONTROL_PANEL">CONTROL_PANEL</h2>
+
+          <div class="mb-6">
+            <h3 class="text-sm uppercase mb-2">System Actions</h3>
+            <div class="grid grid-cols-2 gap-3">
+              <button class="cyber-btn tilambucador-btn px-3 py-2 bg-black border border-cyan-400 rounded text-cyan-400 hover:bg-cyan-400 hover:text-black" onclick="tiltThePipe()"><i class="fas fa-random mr-2"></i>TILAMBUCAR</button>
+              <button class="cyber-btn infernal-btn px-3 py-2 bg-black border border-red-400 rounded text-red-400 hover:bg-red-400 hover:text-black"><i class="fas fa-skull mr-2"></i>DESTROY</button>
+              <button class="cyber-btn px-3 py-2 bg-black border border-purple-400 rounded text-purple-400 hover:bg-purple-400 hover:text-black col-span-2" onclick="runHackSequence()"><i class="fas fa-lock-open mr-2"></i>HACK_SYSTEM</button>
+            </div>
+          </div>
+
+          <div class="mb-6">
+            <h3 class="text-sm uppercase mb-2">System Status</h3>
+            <div class="space-y-2">
+              <div class="flex justify-between items-center">
+                <span>Neural Load</span>
+                <div class="w-24 bg-gray-800 rounded-full h-2.5">
+                  <div class="bg-cyan-400 h-2.5 rounded-full" style="width: 45%"></div>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <span>Firewall</span>
+                <div class="w-24 bg-gray-800 rounded-full h-2.5">
+                  <div class="bg-green-400 h-2.5 rounded-full" style="width: 85%"></div>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <span>Encryption</span>
+                <div class="w-24 bg-gray-800 rounded-full h-2.5">
+                  <div class="bg-yellow-400 h-2.5 rounded-full" style="width: 65%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <h3 class="text-sm uppercase mb-2">Output</h3>
+            <div class="pipe bg-black bg-opacity-70 border border-cyan-400 rounded p-3 text-sm min-h-16" id="pipe"><i class="fas fa-water mr-2"></i>🚰💦 [SYSTEM: PIPE_HACKED]</div>
+          </div>
+
+          <div class="flex justify-between items-center">
+            <div class="flex items-center">
+              <div class="cyber-loader mr-2"></div>
+              <span class="text-xs">SYNC_ACTIVE</span>
+            </div>
+            <span class="text-xs">v4.2.0_ALPHA</span>
+          </div>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="mt-8 pt-6 border-t border-cyan-400 text-sm text-center">
+        <p>WARNING: Unauthorized access prohibited. All activities are monitored.</p>
+        <p class="mt-1">© 2025 Hyoran Castilho Inc. All rights reserved.</p>
+      </footer>
+    </div>
+
+    <!-- SVG Filter for glitch effect -->
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: none">
+      <defs>
+        <filter id="glitch">
+          <feColorMatrix in="SourceGraphic" mode="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r" />
+          <feOffset in="r" result="r" dx="-5">
+            <animate attributeName="dx" values="0; -5; 0" dur="0.1s" repeatCount="1" />
+          </feOffset>
+          <feColorMatrix in="SourceGraphic" mode="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g" />
+          <feOffset in="g" result="g" dx="5">
+            <animate attributeName="dx" values="0; 5; 0" dur="0.1s" repeatCount="1" />
+          </feOffset>
+          <feColorMatrix in="SourceGraphic" mode="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b" />
+          <feOffset in="b" result="b" dx="-5">
+            <animate attributeName="dx" values="0; -5; 0" dur="0.1s" repeatCount="1" />
+          </feOffset>
+          <feBlend in="r" in2="g" mode="screen" result="blend" />
+          <feBlend in="blend" in2="b" mode="screen" result="blend" />
+          <feGaussianBlur in="blend" stdDeviation="1" result="blur" />
+          <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+      </defs>
+    </svg>
+
+    <script>
+      // Terminal functionality
+      function executeCommand() {
+        const input = document.getElementById("terminalInput");
+        const output = document.getElementById("terminalOutput");
+
+        if (input.value.trim() === "") return;
+
+        // Add command to terminal
+        output.innerHTML += `<p class="mb-2"><span class="text-green-400">user@cyberterm:~$</span> ${input.value}</p>`;
+
+        // Process command
+        const response = processCommand(input.value.toLowerCase());
+        output.innerHTML += `<p class="mb-2">${response}</p>`;
+
+        // Clear input and scroll to bottom
+        input.value = "";
+        output.scrollTop = output.scrollHeight;
+      }
+
+      function processCommand(cmd) {
+        const responses = ["ERROR: Command not recognized. Type 'help' for available commands.", "SYSTEM: Processing request...", "WARNING: Insufficient permissions for this operation.", "INFO: Command executed with exit code 0.", "ALERT: Unauthorized access attempt logged.", "SUCCESS: Operation completed."];
+
+        if (cmd === "help") {
+          return "Available commands: status, scan, hack, clear, about";
+        } else if (cmd === "clear") {
+          document.getElementById("terminalOutput").innerHTML = "";
+          return "";
+        } else if (cmd === "hack") {
+          runHackSequence();
+          return "Initializing hack sequence...";
+        } else if (cmd === "tilambucar") {
+          tiltThePipe();
+          return "Executing tilambucar protocol...";
+        } else if (cmd === "status") {
+          return "System status: ONLINE<br>Firewall: ACTIVE<br>Neural load: 45%";
+        } else if (cmd === "about") {
+          return "CyberTerminal v4.2.0<br>Neural interface system<br>(c) 2023 CyberSystems Inc.";
+        } else {
+          return responses[Math.floor(Math.random() * responses.length)];
+        }
+      }
+
+      // Allow Enter key to execute command
+      document.getElementById("terminalInput").addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+          executeCommand();
+        }
+      });
+
+      // Original button functions
+      function tiltThePipe() {
+        const pipe = document.getElementById("pipe");
+        pipe.classList.add("active");
+
+        // Create particles
+        for (let i = 0; i < 20; i++) {
+          createParticle();
+        }
+
+        setTimeout(() => {
+          pipe.classList.remove("active");
+        }, 2000);
+      }
+
+      function createParticle() {
+        const particle = document.createElement("div");
+        particle.style.position = "absolute";
+        particle.style.width = "4px";
+        particle.style.height = "4px";
+        particle.style.background = "#0ff0fc";
+        particle.style.borderRadius = "50%";
+        particle.style.pointerEvents = "none";
+        particle.style.boxShadow = "0 0 10px #0ff0fc, 0 0 20px #0ff0fc";
+
+        // Random position around the button
+        const btn = document.querySelector(".tilambucador-btn");
+        const btnRect = btn.getBoundingClientRect();
+        const x = btnRect.left + btnRect.width / 2 + (Math.random() - 0.5) * 40;
+        const y = btnRect.top + btnRect.height / 2 + (Math.random() - 0.5) * 40;
+
+        particle.style.left = `${x}px`;
+        particle.style.top = `${y}px`;
+
+        document.body.appendChild(particle);
+
+        // Animate particle
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = 2 + Math.random() * 3;
+        const lifetime = 1000 + Math.random() * 1000;
+
+        let startTime = Date.now();
+
+        function update() {
+          const elapsed = Date.now() - startTime;
+          const progress = elapsed / lifetime;
+
+          if (progress >= 1) {
+            particle.remove();
+            return;
+          }
+
+          const distance = (velocity * elapsed) / 20;
+          const currentX = x + Math.cos(angle) * distance;
+          const currentY = y + Math.sin(angle) * distance;
+
+          particle.style.left = `${currentX}px`;
+          particle.style.top = `${currentY}px`;
+          particle.style.opacity = 1 - progress;
+
+          requestAnimationFrame(update);
+        }
+
+        requestAnimationFrame(update);
+      }
+
+      document.querySelector(".infernal-btn").addEventListener("click", () => {
+        // Glitch effect on click
+        document.body.style.overflow = "hidden";
+        document.body.style.filter = 'url("#glitch")';
+
+        setTimeout(() => {
+          document.body.style.filter = "none";
+        }, 300);
+
+        // Add dramatic effect to terminal
+        const output = document.getElementById("terminalOutput");
+        output.innerHTML += `<p class="text-red-400 mb-2">WARNING: SYSTEM DESTRUCTION SEQUENCE INITIATED</p>`;
+        output.scrollTop = output.scrollHeight;
+      });
+
+      // Additional cyber effects
+      function runHackSequence() {
+        const output = document.getElementById("terminalOutput");
+        const originalText = output.innerHTML;
+
+        // Clear terminal
+        output.innerHTML = '<p class="text-purple-400">Initializing hack sequence...</p>';
+
+        // Simulate hacking progress
+        let progress = 0;
+        const hackInterval = setInterval(() => {
+          progress += 10;
+          output.innerHTML = `
+                    <p class="text-purple-400">Hack progress: ${progress}%</p>
+                    <p class="text-xs">Bypassing firewall${".".repeat(Math.floor(progress / 10))}</p>
+                    <p class="text-xs">Injecting payload${".".repeat(Math.floor(progress / 15))}</p>
+                `;
+
+          if (progress >= 100) {
+            clearInterval(hackInterval);
+            output.innerHTML += `
+                        <p class="text-green-400 mt-2">SUCCESS: System compromised</p>
+                        <p class="text-xs">Access level: ROOT</p>
+                    `;
+
+            // Add glitch effect to whole page
+            document.body.style.filter = 'url("#glitch")';
+            setTimeout(() => {
+              document.body.style.filter = "none";
+            }, 500);
+          }
+
+          output.scrollTop = output.scrollHeight;
+        }, 200);
+      }
+
+      // Add some random terminal messages on load
+      window.onload = function () {
+        const messages = ["System boot sequence complete", "Neural interface established", "Firewall protocols active", "Monitoring systems online", "Ready for user input"];
+
+        const output = document.getElementById("terminalOutput");
+        messages.forEach((msg, i) => {
+          setTimeout(() => {
+            output.innerHTML += `<p class="mb-2"><span class="text-green-400">system@cyberterm:~$</span> ${msg}</p>`;
+            output.scrollTop = output.scrollHeight;
+          }, i * 500);
+        });
+      };
+    </script>
+  </body>
+</html>
