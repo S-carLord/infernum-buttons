@@ -20,7 +20,7 @@ Navegue pelos projetos abaixo para ver cada um em ação. Cada pasta contém um 
 
 ### 3. 🤖 Cyberpunk Button (Exemplo)
 
-- **Descrição:** Um botão com estética futurista e cyberpunk, explorando efeitos de glitch, neon e animações complexas. _(adicione sua própria descrição)_
+- **Descrição:** Um botão com estética futurista e cyberpunk, explorando efeitos de glitch, neon e animações complexas. 
 - **➡️ [Acessar o projeto Cyberpunk](./cyberpunk/)**
 
 ---
