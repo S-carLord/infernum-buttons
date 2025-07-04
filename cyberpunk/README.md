@@ -4,7 +4,7 @@
 [![Feito com CSS](https://img.shields.io/badge/estilo-CSS3-1572B6?logo=css3&logoColor=white)](https://developer.mozilla.org/pt-BR/docs/Web/CSS)
 [![Javascript Vanilla](https://img.shields.io/badge/JS-Vanilla-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
 [![Licença MIT](https://img.shields.io/badge/licença-MIT-green)](LICENSE.txt)
-[![GitHub Stars](https://img.shields.io/github/stars/S-carlord/infernum-buttons/tree/main/cyberpunk)](https://github.com/S-carlord/infernum-buttons/tree/main/cyberpunk/stargazers)
+[![GitHub Stars](https://img.shields.io/github/stars/S-carlord/infernum-buttons/tree/main/cyberpunk)](https://github.com/S-carlord/cyberpunk/stargazers)
 
 Este repositório é uma exploração da estética cyberpunk através de interfaces web interativas. O projeto contém uma coleção de componentes de botão, uma simulação de terminal de hacker e um painel de controle de sistemas completo, todos construídos com HTML, CSS e JavaScript puro.
 
