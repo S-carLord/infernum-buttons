@@ -1,0 +1,448 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=MedievalSharp&display=swap");
+
+:root {
+  --infernal-red: #8b0000;
+  --hellfire-orange: #ff4500;
+  --demon-gold: #ffd700;
+  --abyss-black: #000;
+  --ash-gray: #333;
+}
+
+body {
+  font-family: "Cinzel Decorative", cursive;
+  background-color: var(--abyss-black);
+  overflow: hidden;
+  height: 100vh;
+  position: relative;
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path fill='%23ff4500' d='M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1Z'/></svg>"), auto;
+}
+
+.diablo-bg {
+  background-image: url("https://images.blz-contentstack.com/v3/assets/blt77d442c5c2b711a2/blt0d0d7e0a1c3b7a6e/6471a8e0d5b7a10a7a9b5f0e/Diablo-IV-Hell-Key-Art.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(0.5) contrast(1.2);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+
+.blood-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 30%, rgba(139, 0, 0, 0.3) 0%, transparent 25%), radial-gradient(circle at 80% 70%, rgba(255, 69, 0, 0.3) 0%, transparent 25%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.infernal-btn {
+  padding: 16px 32px;
+  background: linear-gradient(135deg, var(--infernal-red), var(--hellfire-orange));
+  border: 3px solid var(--demon-gold);
+  color: white;
+  font-weight: bold;
+  text-shadow: 0 0 5px var(--abyss-black);
+  border-radius: 0;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+  font-family: "Cinzel Decorative", cursive;
+  font-size: 1.3rem;
+  letter-spacing: 2px;
+  box-shadow: 0 0 10px rgba(255, 69, 0, 0.5), 0 0 20px rgba(139, 0, 0, 0.3), inset 0 0 10px rgba(255, 215, 0, 0.3);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.infernal-btn:hover {
+  transform: scale(1.05) rotateX(5deg);
+  box-shadow: 0 0 20px var(--hellfire-orange), 0 0 40px rgba(255, 0, 0, 0.5), inset 0 0 15px rgba(255, 215, 0, 0.5);
+  text-shadow: 0 0 10px var(--demon-gold);
+}
+
+.infernal-btn::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(to bottom right, transparent, transparent, rgba(255, 215, 0, 0.3), transparent);
+  transform: rotate(30deg);
+  animation: shine 3s infinite;
+}
+
+.infernal-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.infernal-btn:hover::after {
+  transform: translateX(100%);
+}
+
+@keyframes shine {
+  to {
+    left: 150%;
+  }
+}
+
+.title {
+  text-shadow: 0 0 10px var(--infernal-red), 0 0 20px var(--hellfire-orange), 0 0 30px rgba(255, 0, 0, 0.5);
+  letter-spacing: 4px;
+  position: relative;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to right, #ff4500, #ff8c00, #ff4500);
+}
+
+.flame {
+  position: absolute;
+  background: radial-gradient(circle, rgba(255, 100, 0, 0.9) 0%, rgba(255, 50, 0, 0.3) 50%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(8px);
+  animation: flicker 2s infinite alternate;
+  z-index: -1;
+  mix-blend-mode: screen;
+}
+
+.ember-particle {
+  position: absolute;
+  background: radial-gradient(circle, rgba(255, 100, 0, 0.9) 0%, rgba(255, 50, 0, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10;
+  filter: blur(1px);
+  transform: translate(-50%, -50%);
+}
+
+.rune {
+  position: absolute;
+  color: var(--demon-gold);
+  font-size: 2rem;
+  opacity: 0.7;
+  animation: float 5s infinite ease-in-out;
+  text-shadow: 0 0 5px var(--hellfire-orange);
+  z-index: -1;
+}
+
+.pentagram {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="none" stroke="%23ff4500" stroke-width="2" d="M50,5 L61.8,38.2 L95,38.2 L67.1,59.6 L78.8,92.8 L50,71.8 L21.2,92.8 L32.9,59.6 L5,38.2 L38.2,38.2 Z"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.2;
+  animation: rotate 30s linear infinite;
+  z-index: -1;
+}
+
+.skull {
+  position: absolute;
+  font-size: 1.5rem;
+  color: rgba(255, 69, 0, 0.5);
+  animation: float 8s infinite ease-in-out;
+  z-index: -1;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.9);
+  }
+}
+
+.burning {
+  position: relative;
+  animation: burnOut 1.5s forwards, textFlicker 0.3s ease-in-out infinite alternate;
+  mask-image: linear-gradient(to top, black 20%, transparent 100%);
+  mask-size: 100% 200%;
+  mask-position: 0 100%;
+  animation: burnMask 1.5s forwards, burnOut 1.5s forwards, textFlicker 0.3s ease-in-out infinite alternate;
+}
+
+.burning::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+  animation: char 1.5s forwards;
+  z-index: 1;
+}
+
+.burning::after {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="50" r="3" fill="black" opacity="0.5"/><circle cx="50" cy="30" r="2" fill="black" opacity="0.3"/><circle cx="70" cy="70" r="1" fill="black" opacity="0.7"/></svg>') repeat-x;
+  animation: ashesRise 2s forwards, fadeOut 1.5s forwards;
+  pointer-events: none;
+  z-index: 2;
+}
+
+@keyframes burnMask {
+  to {
+    mask-position: 0 0;
+  }
+}
+
+@keyframes char {
+  to {
+    height: 100%;
+  }
+}
+
+@keyframes ashesRise {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes textFlicker {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-1px);
+  }
+  75% {
+    transform: translateX(1px);
+  }
+}
+
+@keyframes burnOut {
+  0% {
+    color: var(--hellfire-orange);
+    text-shadow: 0 0 10px #ff8c00, 0 0 20px var(--hellfire-orange);
+    transform: scale(1);
+  }
+  20% {
+    color: #ff0000;
+    text-shadow: 0 0 15px var(--hellfire-orange);
+    transform: scale(1.05);
+  }
+  40% {
+    color: var(--infernal-red);
+    text-shadow: 0 0 5px #ff0000;
+  }
+  60% {
+    color: var(--ash-gray);
+    text-shadow: none;
+  }
+  100% {
+    color: #111;
+    opacity: 0.7;
+    transform: scale(0.98);
+  }
+}
+
+.portal-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, rgba(139, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.8) 100%);
+  box-shadow: 0 0 60px 30px rgba(255, 69, 0, 0.5), 0 0 100px 60px rgba(139, 0, 0, 0.3), 0 0 140px 90px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+}
+
+.portal-glow.active {
+  width: 300px;
+  height: 300px;
+  opacity: 1;
+}
+
+.portal-glow.max {
+  width: 100vw;
+  height: 100vh;
+  opacity: 0.8;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.5) 0%, rgba(255, 69, 0, 0.7) 50%, rgba(139, 0, 0, 0.9) 100%);
+}
+
+.watermark {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  color: rgba(139, 0, 0, 0.5);
+  font-size: 14px;
+  font-family: "Cinzel Decorative", cursive;
+  text-shadow: 0 0 3px #000;
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+
+.watermark:hover {
+  color: rgba(255, 69, 0, 0.8);
+  text-shadow: 0 0 5px #ff0000;
+}
+
+@media (max-width: 640px) {
+  .title {
+    font-size: 3rem !important;
+  }
+  .subtitle {
+    font-size: 1.2rem !important;
+  }
+  .infernal-btn {
+    padding: 12px 24px;
+    font-size: 1.1rem;
+  }
+  .pentagram {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+/* Efeito de distorção demoníaca */
+.hell-distortion {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="none" stroke="rgba(255,69,0,0.05)" stroke-width="0.5" d="M0,0 L100,100 M100,0 L0,100"/></svg>');
+  opacity: 0;
+  pointer-events: none;
+  z-index: 50;
+  transition: opacity 1s ease;
+}
+
+.hell-distortion.active {
+  opacity: 0.3;
+  animation: distort 5s infinite linear;
+}
+
+@keyframes distort {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Efeito de rachaduras */
+.crack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="none" stroke="rgba(139,0,0,0.2)" stroke-width="1" d="M20,20 Q40,10 60,30 T80,60 T40,80 T10,50"/></svg>');
+  background-size: 200px 200px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 49;
+  transition: opacity 1s ease;
+}
+
+.crack.active {
+  opacity: 0.5;
+}
+
+/* Efeito de portal giratório */
+.portal-ring {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border: 5px solid transparent;
+  border-radius: 50%;
+  border-top-color: var(--hellfire-orange);
+  border-bottom-color: var(--demon-gold);
+  box-shadow: 0 0 20px var(--hellfire-orange), inset 0 0 20px var(--hellfire-orange);
+  animation: spin 10s linear infinite;
+  opacity: 0;
+  transition: opacity 1s ease;
+  z-index: -1;
+}
+
+.portal-ring:nth-child(2) {
+  width: 250px;
+  height: 250px;
+  animation-direction: reverse;
+  animation-duration: 8s;
+}
+
+.portal-ring:nth-child(3) {
+  width: 200px;
+  height: 200px;
+  animation-duration: 6s;
+}
+
+.portal-ring.active {
+  opacity: 0.7;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

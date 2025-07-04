@@ -1,0 +1,243 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap");
+
+body {
+  font-family: "Cinzel Decorative", cursive;
+  background-color: #000;
+  overflow: hidden;
+  height: 100vh;
+  position: relative;
+}
+
+.diablo-bg {
+  background-image: url("https://images.blz-contentstack.com/v3/assets/blt77d442c5c2b711a2/blt0d0d7e0a1c3b7a6e/6471a8e0d5b7a10a7a9b5f0e/Diablo-IV-Hell-Key-Art.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.infernal-btn {
+  padding: 12px 24px;
+  background: linear-gradient(45deg, #8b0000, #ff4500);
+  border: 2px solid #ffd700;
+  color: white;
+  font-weight: bold;
+  text-shadow: 0 0 5px #000;
+  border-radius: 0;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+  font-family: "Cinzel Decorative", cursive;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+
+.infernal-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #ff0000;
+}
+
+.infernal-btn::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(to bottom right, transparent, transparent, rgba(255, 215, 0, 0.2), transparent);
+  transform: rotate(30deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  to {
+    left: 150%;
+  }
+}
+
+.title {
+  text-shadow: 0 0 10px #8b0000, 0 0 20px #ff0000;
+  letter-spacing: 3px;
+}
+
+.blood-effect {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.flame {
+  position: absolute;
+  background: radial-gradient(circle, rgba(255, 100, 0, 0.8) 0%, rgba(255, 50, 0, 0.1) 70%);
+  border-radius: 50%;
+  filter: blur(5px);
+  animation: flicker 2s infinite alternate;
+  z-index: -1;
+}
+
+/* Marca d'água estilizada */
+.watermark {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  color: rgba(139, 0, 0, 0.5);
+  font-size: 14px;
+  font-family: "Cinzel Decorative", cursive;
+  text-shadow: 0 0 3px #000;
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+
+.watermark:hover {
+  color: rgba(255, 69, 0, 0.8);
+  text-shadow: 0 0 5px #ff0000;
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.9);
+  }
+}
+
+/* Partículas vermelhas */
+.ember-particle {
+  position: absolute;
+  background: radial-gradient(circle, rgba(255, 100, 0, 0.9) 0%, rgba(255, 50, 0, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10;
+  filter: blur(1px);
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 640px) {
+  .flame {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  .watermark {
+    font-size: 12px;
+    bottom: 5px;
+    right: 5px;
+  }
+}
+
+/* Efeito de queimar texto melhorado */
+.burning {
+  position: relative;
+  animation: burnOut 1.5s forwards, textFlicker 0.3s ease-in-out infinite alternate;
+  mask-image: linear-gradient(to top, black 20%, transparent 100%);
+  mask-size: 100% 200%;
+  mask-position: 0 100%;
+  animation: burnMask 1.5s forwards, burnOut 1.5s forwards, textFlicker 0.3s ease-in-out infinite alternate;
+}
+
+.burning::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+  animation: char 1.5s forwards;
+  z-index: 1;
+}
+
+.burning::after {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="50" r="3" fill="black" opacity="0.5"/><circle cx="50" cy="30" r="2" fill="black" opacity="0.3"/><circle cx="70" cy="70" r="1" fill="black" opacity="0.7"/></svg>') repeat-x;
+  animation: ashesRise 2s forwards, fadeOut 1.5s forwards;
+  pointer-events: none;
+  z-index: 2;
+}
+
+@keyframes burnMask {
+  to {
+    mask-position: 0 0;
+  }
+}
+
+@keyframes char {
+  to {
+    height: 100%;
+  }
+}
+
+@keyframes ashesRise {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes textFlicker {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-1px);
+  }
+  75% {
+    transform: translateX(1px);
+  }
+}
+
+@keyframes burnOut {
+  0% {
+    color: #ff4500;
+    text-shadow: 0 0 10px #ff8c00, 0 0 20px #ff4500;
+    transform: scale(1);
+  }
+  20% {
+    color: #ff0000;
+    text-shadow: 0 0 15px #ff4500;
+    transform: scale(1.05);
+  }
+  40% {
+    color: #8b0000;
+    text-shadow: 0 0 5px #ff0000;
+  }
+  60% {
+    color: #333;
+    text-shadow: none;
+  }
+  100% {
+    color: #111;
+    opacity: 0.7;
+    transform: scale(0.98);
+  }
+}
