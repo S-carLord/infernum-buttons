@@ -20,7 +20,7 @@ Navegue pelos projetos abaixo para ver cada um em ação. Cada pasta contém um 
 
 ### 3. 🤖 Cyberpunk Button (Exemplo)
 
-- **Descrição:** Um botão com estética futurista e cyberpunk, explorando efeitos de glitch, neon e animações complexas. 
+- **Descrição:** Um botão com estética futurista e cyberpunk, explorando efeitos de glitch, neon e animações complexas.
 - **➡️ [Acessar o projeto Cyberpunk](./cyberpunk/)**
 
 ---
@@ -36,3 +36,11 @@ A maioria dos projetos nesta coleção é construída com:
 ## 🤝 Como Contribuir
 
 Fique à vontade para explorar, usar o código e se inspirar! Se tiver ideias para novos botões ou melhorias nos existentes, por favor, verifique o `README.md` do projeto específico para mais detalhes sobre como contribuir.
+
+---
+
+## 🙋‍♂️ Autor
+
+Criado por **Hyoran Castilho - S-carlord**  
+🌃 Apaixonado por interfaces futuristas, estética cyberpunk e interatividade complexa.  
+📩 Conecte-se comigo: [GitHub](https://github.com/S-carlord) | [LinkedIn](https://www.linkedin.com/in/hyoran-c-760604364/)

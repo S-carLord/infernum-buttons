@@ -4,7 +4,7 @@
 [![Feito com CSS](https://img.shields.io/badge/estilo-CSS3-1572B6?logo=css3&logoColor=white)](https://developer.mozilla.org/pt-BR/docs/Web/CSS)
 [![Javascript Vanilla](https://img.shields.io/badge/JS-Vanilla-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
 [![Licença MIT](https://img.shields.io/badge/licença-MIT-green)](LICENSE)
-[![GitHub Stars](https://img.shields.io/github/stars/seu-usuario/infernum-buttons)](https://github.com/seu-usuario/infernum-buttons/stargazers)
+[![GitHub Stars](https://img.shields.io/github/stars/S-carlord/infernum-buttons)](https://github.com/S-carlord/infernum-buttons/stargazers)
 
 Este repositório contém uma coleção temática de **botões infernais** criados com HTML, CSS e JavaScript puro, inspirados no universo sombrio de _Diablo IV_. Inclui também uma página demonstrativa com narrativa interativa, sons demoníacos e efeitos visuais avançados.
 

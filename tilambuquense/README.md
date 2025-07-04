@@ -4,7 +4,7 @@
 [![Feito com CSS](https://img.shields.io/badge/estilo-CSS3-1572B6?logo=css3&logoColor=white)](https://developer.mozilla.org/pt-BR/docs/Web/CSS)
 [![Javascript Vanilla](https://img.shields.io/badge/JS-Vanilla-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
 [![Licença MIT](https://img.shields.io/badge/licença-MIT-green)](LICENSE)
-[![GitHub Stars](https://img.shields.io/github/stars/seu-usuario/tilambuquense)](https://github.com/seu-usuario/tilambuquense/stargazers)
+[![GitHub Stars](https://img.shields.io/github/stars/S-carlord/tilambuquense)](https://github.com/S-carlord/tilambuquense/stargazers)
 
 A revolução na arte de tilambucar canos está aqui! O **Tilambucador 3000** é uma aplicação web interativa que combina tecnologia de ponta com resultados úmidos e inexplicavelmente divertidos. Este repositório contém o código-fonte da aplicação completa e seu componente base isolado.
 
@@ -12,7 +12,7 @@ A revolução na arte de tilambucar canos está aqui! O **Tilambucador 3000** é
 
 ## 🚀 Demonstração Online
 
-Teste o **Tilambucador 3000** em ação [aqui](https://S-caarlord/tilambuquense/App/)!  
+Teste o **Tilambucador 3000** em ação [aqui](https://S-caarlord/tilambuquense/App/)!
 
 ## 📸 Visualização
 
@@ -102,9 +102,9 @@ Use, adapte e divirta-se com o Tilambucador 3000 — mas não diga que foi você
 
 ## 🙋‍♂️ Autor
 
-Criado por **Seu Nome**  
-💧 Apaixonado por interatividade, animações dinâmicas e experiências web únicas.  
-📩 Conecte-se comigo: [GitHub](https://github.com/seu-usuario) | [LinkedIn](https://linkedin.com/in/seu-perfil)
+Criado por **Hyoran Castilho - S-carlord**  
+🌃 Apaixonado por interfaces futuristas, estética cyberpunk e interatividade complexa.  
+📩 Conecte-se comigo: [GitHub](https://github.com/S-carlord) | [LinkedIn](https://www.linkedin.com/in/hyoran-c-760604364/)
 
 ---
 
